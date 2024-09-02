@@ -1,0 +1,128 @@
+{
+  "link": {
+    "type": "linking",
+    "title": {
+      "fr": "Un nouvel évènement pour votre recherche !",
+      "en": "A new event for your research!"
+    },
+    "body": {
+      "fr": "Un client a proximité a peut être besoin de vos services !",
+      "en": "A nearby client may need your services! "
+    },
+    "deep_link": "deep_link/linking",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "customer_like": {
+    "type": "linking",
+    "title": {
+      "fr": "Un nouvel évènement pour votre recherche !",
+      "en": "A new event for your research!"
+    },
+    "body": {
+      "fr": "$fliiinker_first_name, vous avez un like de $customer_first_name !",
+      "en": "$fliiinker_first_name, you have a like from $customer_first_name!"
+    },
+    "deep_link": "deep_link/linking",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "fliiinker_accept": {
+    "type": "linking",
+    "title": {
+      "fr": "Un nouvel évènement pour votre recherche !",
+      "en": "A new event for your research!"
+    },
+    "body": {
+      "fr": "$customer_first_name, le fliiinker $fliiinker_first_name a accepté votre proposition !",
+      "en": "$customer_first_name, the fliiinker $fliiinker_first_name has accepted your proposal!"
+    },
+    "deep_link": "deep_link/linking",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "fliiinker_refuse": {
+    "type": "linking",
+    "title": {
+      "fr": "Un nouvel évènement pour votre recherche !",
+      "en": "A new event for your research!"
+    },
+    "body": {
+      "fr": "Le fliiinker $fliiinker_first_name a refusé votre proposition... :( Mais vous pouvez encore lui faire changer d'avis en lui laissant un like  !",
+      "en": "The fliiinker $fliiinker_first_name refused your proposal... :( But you can still change his mind by leaving him a like"
+    },
+    "deep_link": "deep_link/linking",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "fliiinker_relaunch": {
+    "type": "linking",
+    "title": {
+      "fr": "Un nouvel évènement pour votre recherche !",
+      "en": "A new event for your research!"
+    },
+    "body": {
+      "fr": "$customer_first_name vous a liké malgrès votre refus. Etes-vous sûr de vouloir refuser cette offre, $fliiinker_first_name ?",
+      "en": "$customer_first_name liked you despite your refusal. Are you sure you want to refuse this offer, $fliiinker_first_name?"
+    },
+    "deep_link": "deep_link/linking",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "fliiinker_abort": {
+    "type": "linking",
+    "title": {
+      "fr": "Un nouvel évènement pour votre recherche !",
+      "en": "A new event for your research!"
+    },
+    "body": {
+      "fr": "$fliiinker_first_name a refusé votre proposition... :( Ne vous découragez pas $customer_first_name, d'autres fliiinkers seront prêts à accepter votre offre !",
+      "en": "$fliiinker_first_name refused your proposal... :( Don't be discouraged $customer_first_name, other fliiinkers will be ready to accept your offer!"
+    },
+    "deep_link": "deep_link/linking",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "is_pre_fliiink": {
+    "type": "linking",
+    "title": {
+      "fr": "Un nouvel évènement pour votre recherche !",
+      "en": "A new event for your research!"
+    },
+    "body": {
+      "fr": "Vous avez peut-être un Fliiink !",
+      "en": "You may have a Fliiink!"
+    },
+    "deep_link": "deep_link/linking",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "customer_confirm": {
+    "type": "linking",
+    "title": {
+      "fr": "Un nouvel évènement pour votre recherche !",
+      "en": "A new event for your research!"
+    },
+    "body": {
+      "fr": "Félicitations $fliiinker_first_name ! $customer_first_name a vous a choisi pour réaliser cette prestation !",
+      "en": "Congrats $fliiinker_first_name! $customer_first_name has chosen you to carry out this service!"
+    },
+    "deep_link": "deep_link/linking",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "is_fliiink": {
+    "type": "linking",
+    "title": {
+      "fr": "Un nouvel évènement pour votre recherche !",
+      "en": "A new event for your research!"
+    },
+    "body": {
+      "fr": "Vous avez un Fliiink !",
+      "en": "You  have a Fliiink!"
+    },
+    "deep_link": "deep_link/linking",
+    "is_socket_event": true,
+    "is_push": true
+  }
+}

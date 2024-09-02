@@ -1,0 +1,100 @@
+{
+  "confirm_payment": {
+    "type": "order",
+    "title": {
+      "fr": "Votre paiement est confirmé ! ",
+      "en": "A new event for your order!"
+    },
+    "body": {
+      "fr": "$customer_first_name votre paiement a bien été reçu",
+      "en": "goooooood job"
+    },
+    "deep_link": "deep_link/order",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "fliiinker_on_the_way": {
+    "type": "order",
+    "title": {
+      "fr": "Un nouvel évènement pour votre commande !",
+      "en": "A new event for your order!"
+    },
+    "body": {
+      "fr": "Le fliiinker $fliiinker_first_name est en route !",
+      "en": "The fliiinker $fliiinker_first_name is on the way! "
+    },
+    "deep_link": "deep_link/order",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "fliiinker_start_service": {
+    "type": "order",
+    "title": {
+      "fr": "Un nouvel évènement pour votre commande !",
+      "en": "A new event for your order!"
+    },
+    "body": {
+      "fr": "Le fliiinker $fliiinker_first_name a commencé sa prestation !",
+      "en": "The fliiinker $fliiinker_first_name has started his service! "
+    },
+    "deep_link": "deep_link/order",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "customer_confirm_start_service": {
+    "type": "order",
+    "title": {
+      "fr": "Un nouvel évènement pour votre commande !",
+      "en": "A new event for your order!"
+    },
+    "body": {
+      "fr": "Le client $customer_first_name a confirmé le début de votre prestation !",
+      "en": "The customer $customer_first_name has confirmed the start of your service!"
+    },
+    "deep_link": "deep_link/order",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "customer_complete_service_before_due_date": {
+    "type": "order",
+    "title": {
+      "fr": "Un nouvel évènement pour votre commande !",
+      "en": "A new event for your order!"
+    },
+    "body": {
+      "fr": "Le client $customer_first_name a annoncé que votre prestation est terminée avant la fin prévue ! Vous pouvez terminer votre mission on cliquant ici",
+      "en": "The customer $customer_first_name has announced that your service is completed before the scheduled end! You can complete your mission by clicking here"
+    },
+    "deep_link": "deep_link/order",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "fliiinker_complete_service": {
+    "type": "order",
+    "title": {
+      "fr": "Un nouvel évènement pour votre commande !",
+      "en": "A new event for your order!"
+    },
+    "body": {
+      "fr": "$customer_first_name, le fliiinker $fliiinker_first_name a indiqué avoir terminé sa prestation !",
+      "en": "$customer_first_name, the fliiinker $fliiinker_first_name has indicated that he has finished his service!"
+    },
+    "deep_link": "deep_link/order",
+    "is_socket_event": true,
+    "is_push": true
+  },
+  "customer_cancel": {
+    "type": "order",
+    "title": {
+      "fr": "Un nouvel évènement pour votre commande !",
+      "en": "A new event for your order!"
+    },
+    "body": {
+      "fr": "$fliiinker_first_name, le client $customer_first_name a annulé la demande de prestation :(",
+      "en": "$fliiinker_first_name, the customer $customer_first_name has canceled the service request :("
+    },
+    "deep_link": "deep_link/order",
+    "is_socket_event": true,
+    "is_push": true
+  }
+}

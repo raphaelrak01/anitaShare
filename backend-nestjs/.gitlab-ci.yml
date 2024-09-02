@@ -1,0 +1,104 @@
+image: node:20.5.1-alpine3.18
+
+variables:
+  IMAGE_NAME: fliiink-backend-nestjs
+  IMAGE_TAG: $CI_COMMIT_SHORT_SHA
+
+stages:
+  - Test
+  - Build
+  - Docker
+  - Deploy
+
+cache:
+  paths:
+    - node_modules/
+
+Test:
+  stage: Test
+  needs: []
+  before_script:
+    - npm ci
+  artifacts:
+    paths:
+      - dist/
+      - node_modules/
+  cache:
+    paths:
+      - dist/
+      - node_modules/
+  script:
+    - echo "No tests ..."
+
+Build App:
+  stage: Build
+  needs: [Test]
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'staging' || $CI_COMMIT_BRANCH == 'main'
+  artifacts:
+    paths:
+      - dist/
+      - node_modules/
+  cache:
+    paths:
+      - dist/
+      - node_modules/
+  script:
+    - echo "Building app ..."
+    - npm run build
+
+Build and Push App Docker image:
+  stage: Docker
+  needs: [Test, Build App]
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'staging' || $CI_COMMIT_BRANCH == 'main'
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - echo $DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin
+  script:
+    - docker build -t $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG .
+    - docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG
+
+Deploy to staging:
+  stage: Deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'staging'
+  before_script:
+    - 'echo "Prepare deploying to Staging environment" '
+    - 'command -v ssh-agent >/dev/null || ( apk update && apk add openssh-client )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ssh-keyscan $STAGING_SERVER_IP >> ~/.ssh/known_hosts
+  script:
+    - 'echo "Deploying to Staging environment" '
+    - ssh $STAGING_SERVER_USER@$STAGING_SERVER_IP "echo $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG > ~/docker-containers/fliiink-backend-nestjs/last_image && ~/docker-containers/fliiink-backend-nestjs/deploy.sh"
+  environment:
+    name: staging
+    url: https://api.kiplynk.com/api-docs
+
+Deploy to prod:
+  stage: Deploy
+  needs: [Build and Push App Docker image]
+  image: node:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main'
+  before_script:
+    - 'echo "prepare deploying to production environment" '
+    - 'command -v ssh-agent >/dev/null || ( apk update && apk add openssh-client )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ssh-keyscan $PROD_SERVER_IP >> ~/.ssh/known_hosts
+  script:
+    - 'echo "deploying to production environment" '
+    - ssh $PROD_SERVER_USER@$PROD_SERVER_IP "echo $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG > ~/docker-containers/fliiink-backend-nestjs/last_image && ~/docker-containers/fliiink-backend-nestjs/deploy.sh"
+  environment:
+    name: production
+    url: https://todo/docs

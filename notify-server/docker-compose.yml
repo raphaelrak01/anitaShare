@@ -1,0 +1,30 @@
+services:
+  notify-server-nestjs:
+    env_file:
+      - .env
+    build: .
+    container_name: ${DOCKER_CONTAINER_NAME}
+    ports:
+      - '${DOCKER_CONTAINER_HOST_PORT}:${DOCKER_CONTAINER_INTERN_PORT}'
+    depends_on:
+      - redis-notify-server-nestjs
+    environment:
+      - NODE_ENV=staging
+    volumes:
+      - ./fcm-config.json:${FCM_CONFIG_PATH}
+    networks:
+      - fliiink-network
+
+  redis-notify-server-nestjs:
+    env_file:
+      - .env
+    image: redis:latest
+    container_name: ${DOCKER_REDIS_CONTAINER_NAME}
+    ports:
+      - '${DOCKER_REDIS_CONTAINER_HOST_PORT}:6379'
+    networks:
+      - fliiink-network
+
+networks:
+  fliiink-network:
+    external: true

@@ -1,0 +1,28 @@
+stages:
+- deploy
+.deploy_script:
+  image: node:18
+  stage: deploy
+  cache:
+    paths:
+    - node_modules/
+    - .npm/
+  script:
+  - echo "project id is $SUPABASE_PROJECT_ID"
+  - export SUPABASE_ACCESS_TOKEN=$SUPABASE_ACCESS_TOKEN
+  - npx supabase link --project-ref $SUPABASE_PROJECT_ID -p $SUPABASE_DB_PASSWORD
+  - npx supabase db push --password $SUPABASE_DB_PASSWORD
+
+deploy_staging:
+  rules:
+  - if: $CI_COMMIT_BRANCH == 'staging'
+  environment:
+    name: staging
+  extends: .deploy_script
+
+deploy_production:
+  rules:
+  - if: $CI_COMMIT_BRANCH == 'main'
+  environment:
+    name: production
+  extends: .deploy_script

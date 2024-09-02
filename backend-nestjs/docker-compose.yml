@@ -1,0 +1,35 @@
+version: '3'
+services:
+  fliiink-backend-nestjs:
+    env_file:
+      - .env
+    build: .
+    container_name: ${DOCKER_CONTAINER_NAME}
+    ports:
+      - '${DOCKER_CONTAINER_HOST_PORT}:${DOCKER_CONTAINER_INTERN_PORT}'
+    depends_on:
+      - redis-fliiink-backend-nestjs
+    healthcheck:
+      test: curl --fail http://localhost:3000/health || exit 1
+      timeout: 3s
+      interval: 1m
+      retries: 3
+    environment:
+      - NODE_ENV=localhost
+    volumes:
+      - ./notification-templates/:${NOTIFICATION_TEMPLATES}
+    networks:
+      - fliiink-network
+  redis-fliiink-backend-nestjs:
+    env_file:
+      - .env
+    image: redis:latest
+    container_name: ${DOCKER_REDIS_CONTAINER_NAME}
+    ports:
+      - '${DOCKER_REDIS_CONTAINER_HOST_PORT}:6379'
+    networks:
+      - fliiink-network
+
+networks:
+  fliiink-network:
+    external: true
